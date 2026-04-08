@@ -61,7 +61,8 @@ projeto-progweb/
 
 ## 📦 Publicação
 
-Este projeto está publicado no GitHub Pages e pode ser jogado online através do link do repositório.
+Este projeto está publicado no GitHub Pages e pode ser jogado online através do link do repositório:
+https://vitingrm.github.io/bounce-survival-web/
 
 ## 📄 Licença
 
