@@ -2,6 +2,15 @@ const canvas = document.getElementById('pongCanvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('score');
 const resetBtn = document.getElementById('resetBtn');
+const startBtn = document.getElementById('startBtn');
+
+// Função para gerar posição aleatória da bola
+function getRandomBallPosition() {
+    return {
+        x: Math.random() * (canvas.width - 40) + 20, // Entre 20 e canvas.width - 20
+        y: 50
+    };
+}
 
 // Elementos do jogo
 let ball = {
@@ -21,7 +30,8 @@ let paddle = {
 };
 
 let score = 0;
-let gameRunning = true;
+let gameRunning = false;
+let animationRunning = true;
 
 // Controles
 let rightPressed = false;
@@ -127,15 +137,30 @@ function gameLoop() {
 
 // Reiniciar jogo
 resetBtn.addEventListener('click', () => {
-    ball.x = canvas.width / 2;
-    ball.y = 50;
+    let pos = getRandomBallPosition();
+    ball.x = pos.x;
+    ball.y = pos.y;
     ball.dx = 2;
     ball.dy = 2;
     paddle.x = canvas.width / 2 - 50;
     score = 0;
     scoreDisplay.textContent = 'Pontuação: 0';
     gameRunning = true;
+    startBtn.textContent = '⏸ Pausar Jogo';
+    rightPressed = false;
+    leftPressed = false;
 });
 
-// Iniciar jogo
+// Iniciar/Pausar jogo
+startBtn.addEventListener('click', () => {
+    if (!gameRunning) {
+        gameRunning = true;
+        startBtn.textContent = '⏸ Pausar Jogo';
+    } else {
+        gameRunning = false;
+        startBtn.textContent = '▶ Retomar Jogo';
+    }
+});
+
+// Iniciar loop de animação
 gameLoop();
